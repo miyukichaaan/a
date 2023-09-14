@@ -1,0 +1,120 @@
+<html>
+<head>
+</head>
+<body>
+<fieldset>
+<legend>参加者:</legend>
+<form id="myForm">
+<div>
+<input type="checkbox" id="scales1" name="member" value="星野" checked />
+<label for="scales1">星野</label>
+</div>
+<div>
+<input type="checkbox" id="scales2" name="member" value="笛田" checked />
+<label for="scales2">笛田</label>
+</div>
+<div>
+<input type="checkbox" id="scales3" name="member" value="伊東" checked />
+<label for="scales3">伊東</label>
+</div>
+<div>
+<input type="checkbox" id="scales4" name="member" value="近藤" checked />
+<label for="scales4">近藤</label>
+</div>
+<div>
+<input type="checkbox" id="scales5" name="member" value="町田" checked />
+<label for="scales5">町田</label>
+</div>
+<div>
+<input type="checkbox" id="scales5" name="member" value="増保" checked />
+<label for="scales5">増保</label>
+</div>
+<div>
+<input type="checkbox" id="scales5" name="member" value="永島" checked />
+<label for="scales5">永島</label>
+</div>
+<div>
+<input type="checkbox" id="scales5" name="member" value="中川" checked />
+<label for="scales5">中川</label>
+</div>
+<div>
+<input type="checkbox" id="scales5" name="member" value="二階堂" checked />
+<label for="scales5">二階堂</label>
+</div>
+<div>
+<input type="checkbox" id="scales5" name="member" value="岡竹" checked />
+<label for="scales5">岡竹</label>
+</div>
+<div>
+<input type="checkbox" id="scales5" name="member" value="冨樫" checked />
+<label for="scales5">冨樫</label>
+</div>
+<div>
+<input type="checkbox" id="scales5" name="member" value="山田" checked />
+<label for="scales5">山田</label>
+</div>
+<input type="submit" value="シャッフル">
+</form>
+</fieldset>
+
+
+<div style="text-align:center;">
+<p>前</p>
+<table id="result" border='1' align="center"></table>
+<p>後</p>
+</div>
+
+<script>
+function randomSort(a,b){
+ 　　return Math.random() - 0.5;
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('myForm');
+    const resultDiv = document.getElementById('result');
+
+    form.addEventListener('submit', function (event) {
+		event.preventDefault(); // ページのリロードを防ぐ
+		
+		const vals = [];
+		const checkboxes = document.querySelectorAll('input[ name="member"]:checked');
+		checkboxes.forEach(function(checkbox) {
+		 vals.push(checkbox.value);
+		});
+		
+        const shuffledArray = vals.slice().sort(randomSort);
+		console.log(shuffledArray)
+		
+		let inserthtml = '<table id="result" border="1" align="center">';
+		for (let i=1;i<17;i++){
+		   if ((i-1) % 4 ==0){
+             inserthtml=inserthtml+"<tr>";
+		   }
+		   if ((i-1) % 2 == 0){
+             inserthtml=inserthtml+"<th>";
+		   }
+		   if (i<shuffledArray.length+1){
+              inserthtml=inserthtml+shuffledArray[i-1];
+		   }else{
+              inserthtml=inserthtml+i;
+		   }
+		   if (i>1 & (i-1) % 2 == 1){
+              inserthtml=inserthtml+"</th>";
+		   }else{
+		      inserthtml=inserthtml+",";
+		   }
+		   if (i>1 & (i-1) % 4 ==3){
+              inserthtml=inserthtml+"</tr>";
+		   }
+
+		}
+		inserthtml=inserthtml+"</table>";
+		resultDiv.innerHTML = inserthtml;
+		console.log(inserthtml)
+	});
+});
+
+</script>
+
+</body>
+</html>
